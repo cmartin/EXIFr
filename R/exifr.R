@@ -213,7 +213,7 @@ read_exif_tags <- function(file_path) {
   if ( res$marker == "4D4D") {
     endian <- "big"
   } else {
-    endian <- "small"
+    endian <- "little"
   }
   rm(res)
 
