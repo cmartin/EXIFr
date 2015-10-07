@@ -26,7 +26,7 @@ expect_that(
 
 expect_that(
   read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["FocalLength"]],
-  equals("18")
+  equals("18/1")
 )
 
 
