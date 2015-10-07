@@ -164,6 +164,7 @@ tag_number_to_tag_name <- function(tag_number){
   pairs[[ "41987" ]] <- "WhiteBalance"
   pairs[[ "33434" ]] <- "ExposureTime"
   pairs[[ "37378" ]] <- "ApertureValue"
+  pairs[[ "37377" ]] <- "ShutterSpeedValue"
 
   pairs[[ "271" ]] <- "Make"
   pairs[[ "272" ]] <- "Model"
