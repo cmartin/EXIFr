@@ -12,8 +12,8 @@ expect_that(
 )
 
 expect_that(
-  read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ShutterSpeedValue"]],
-  equals("1/3158")
+  read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ExposureTime"]],
+  equals("1/3200")
 )
 
 expect_that(

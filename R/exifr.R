@@ -115,7 +115,7 @@ read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
 
     IFD_start <- IFD_start + 12
 
-    #print(tag_value)
+    #print(paste(tag_type, tag_number,tag_value))
 
     if (tag_number == 34665) {
       #print("Into Sub IFD")
@@ -162,7 +162,7 @@ tag_number_to_tag_name <- function(tag_number){
   pairs[[ "41990" ]] <- "SceneCaptureType"
   pairs[[ "41986" ]] <- "ExposureMode"
   pairs[[ "41987" ]] <- "WhiteBalance"
-  pairs[[ "37377" ]] <- "ShutterSpeedValue"
+  pairs[[ "33434" ]] <- "ExposureTime"
   pairs[[ "37378" ]] <- "ApertureValue"
 
   pairs[[ "271" ]] <- "Make"
