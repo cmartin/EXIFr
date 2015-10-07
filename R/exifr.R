@@ -67,7 +67,7 @@ read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
                         {# 2 = ASCII
                           readBin(
                             all_bytes[(TIFF_offset + data_position + 1):
-                                        (TIFF_offset + data_position + 1 + data_length)],
+                                        (TIFF_offset + data_position + data_length)],
                             "char",
                             size = data_length
                           )

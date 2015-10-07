@@ -16,7 +16,7 @@ expect_that(
   equals("Wingscapes")
 )
 
-# expect_that(
-#   read_exif_tags(system.file("extdata", "WSCT0151.JPG", package = "EXIFr"))[["ApertureValue"]],
-#   equals("3/1")
-# )
+expect_that(
+  read_exif_tags(system.file("extdata", "WSCT0151.JPG", package = "EXIFr"))[["ApertureValue"]],
+  equals("3/1")
+)
