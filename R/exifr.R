@@ -1,5 +1,6 @@
 # http://code.flickr.net/2012/06/01/parsing-exif-client-side-using-javascript-2/
 # http://www.media.mit.edu/pia/Research/deepview/exif.html
+# http://www.exiv2.org/Exif2-2.PDF p. 14
 
 .read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
 
@@ -44,22 +45,8 @@
     )
 
 
-    #     http://www.exiv2.org/Exif2-2.PDF p. 14
-    #     Type
-    #     The following types are used in Exif:
-    #     1 = BYTE An 8-bit unsigned integer.,
-    #     2 = ASCII An 8-bit byte containing one 7-bit ASCII code. The final byte is terminated with NULL.,
-    #     3 = SHORT A 16-bit (2-byte) unsigned integer,
-    #     4 = LONG A 32-bit (4-byte) unsigned integer,
-    #     5 = RATIONAL Two LONGs. The first LONG is the numerator and the second LONG expresses the
-    #     denominator.,
-    #     7 = UNDEFINED An 8-bit byte that can take any value depending on the field definition,
-    #     9 = SLONG A 32-bit (4-byte) signed integer (2's complement notation),
-    #                                                 10 = SRATIONAL Two SLONGs. The first SLONG is the numerator and the second SLONG is the
-    #                                                 denominator.
+    #
 
-
-    #print(tag_number)
     tag_name <- .tag_number_to_tag_name(tag_number)
     tag_value <- switch(tag_type,
                         {"Byte not implemented"},
@@ -118,7 +105,6 @@
     #print(paste(tag_type, tag_number,tag_value))
 
     if (tag_number == 34665) {
-      #print("Into Sub IFD")
       #http://www.awaresystems.be/imaging/tiff/tifftags/subifds.html
       # Sub IFD offsets are relative to the TIFF header
       tag_list <- append(
@@ -163,12 +149,12 @@
 .tag_number_to_tag_name <- function(tag_number){
   pairs = list()
 
-  pairs[[ "41990" ]] <- "SceneCaptureType"
-  pairs[[ "41986" ]] <- "ExposureMode"
-  pairs[[ "41987" ]] <- "WhiteBalance"
+#   pairs[[ "41990" ]] <- "SceneCaptureType"
+#   pairs[[ "41986" ]] <- "ExposureMode"
+#   pairs[[ "41987" ]] <- "WhiteBalance"
   pairs[[ "33434" ]] <- "ExposureTime"
   pairs[[ "37378" ]] <- "ApertureValue"
-  pairs[[ "37377" ]] <- "ShutterSpeedValue"
+  # pairs[[ "37377" ]] <- "ShutterSpeedValue"
   pairs[[ "37386" ]] <- "FocalLength"
   pairs[[ "34855" ]] <- "ISOSpeedRatings"
 
@@ -181,10 +167,10 @@
 
   t = as.character(tag_number)
   if (t %in% names(pairs)) {
-    pairs[[as.character(tag_number)]]
+    pairs[[t]]
   } else {
     #warning(paste(tag_number, " tag number is not defined"))
-    return(tag_number)
+    tag_number
   }
 
 }

@@ -16,7 +16,7 @@ expect_that(
   equals("2013:07:09 10:23:47")
 )
 
-context("tags from the sub-IFD section")
+context("Tags from the sub-IFD section")
 
 expect_that(
   read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ExposureTime"]],
