@@ -166,6 +166,10 @@ tag_number_to_tag_name <- function(tag_number){
   pairs[[ "37378" ]] <- "ApertureValue"
   pairs[[ "37377" ]] <- "ShutterSpeedValue"
   pairs[[ "37386" ]] <- "FocalLength"
+  pairs[[ "34855" ]] <- "ISOSpeedRatings"
+
+  pairs[[ "40963" ]] <- "PixelYDimension"
+  pairs[[ "40962" ]] <- "PixelXDimension"
 
   pairs[[ "306" ]] <- "DateTime"
   pairs[[ "271" ]] <- "Make"
@@ -175,8 +179,8 @@ tag_number_to_tag_name <- function(tag_number){
   if (t %in% names(pairs)) {
     pairs[[as.character(tag_number)]]
   } else {
-    warning(paste(tag_number, " tag number is not defined"))
-    return (tag_number)
+    #warning(paste(tag_number, " tag number is not defined"))
+    return(tag_number)
   }
 
 }

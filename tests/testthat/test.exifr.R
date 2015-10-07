@@ -34,6 +34,21 @@ expect_that(
 )
 
 expect_that(
+  read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ISOSpeedRatings"]],
+  equals(800)
+)
+
+expect_that(
+  read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["PixelYDimension"]],
+  equals(67)
+)
+
+expect_that(
+  read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["PixelXDimension"]],
+  equals(100)
+)
+
+expect_that(
   read_exif_tags(system.file("extdata", "WSCT0151.JPG", package = "EXIFr"))[["ApertureValue"]],
   equals("3/1")
 )
