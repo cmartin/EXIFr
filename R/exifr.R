@@ -1,7 +1,7 @@
 # http://code.flickr.net/2012/06/01/parsing-exif-client-side-using-javascript-2/
 # http://www.media.mit.edu/pia/Research/deepview/exif.html
 
-read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
+.read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
 
   tag_list = list()
   nb_dir_entries <- readBin(
@@ -60,7 +60,7 @@ read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
 
 
     #print(tag_number)
-    tag_name <- tag_number_to_tag_name(tag_number)
+    tag_name <- .tag_number_to_tag_name(tag_number)
     tag_value <- switch(tag_type,
                         {"Byte not implemented"},
 
@@ -123,7 +123,7 @@ read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
       # Sub IFD offsets are relative to the TIFF header
       tag_list <- append(
         tag_list,
-        read_ifd_at(tag_value + TIFF_offset, all_bytes, endian, TIFF_offset)
+        .read_ifd_at(tag_value + TIFF_offset, all_bytes, endian, TIFF_offset)
       )
     } else {
       tag_list[[tag_name]] <- tag_value
@@ -136,7 +136,7 @@ read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
 }
 
 
-find_raw_marker <- function(marker, all_bytes, start_offset=0) {
+.find_raw_marker <- function(marker, all_bytes, start_offset=0) {
 
   reading_head <- start_offset + 1
   marker_length <- nchar(marker[1]) / 2 # Hope all markers have the same length
@@ -160,7 +160,7 @@ find_raw_marker <- function(marker, all_bytes, start_offset=0) {
   }
 }
 
-tag_number_to_tag_name <- function(tag_number){
+.tag_number_to_tag_name <- function(tag_number){
   pairs = list()
 
   pairs[[ "41990" ]] <- "SceneCaptureType"
@@ -201,7 +201,7 @@ read_exif_tags <- function(file_path) {
   close(con);rm(con)
 
   # Find the APP1 marker
-  res <- find_raw_marker("FFE1", all_bytes)
+  res <- .find_raw_marker("FFE1", all_bytes)
   APP1_offset <- res$offset
 
   if (is.null(res)) {
@@ -218,11 +218,11 @@ read_exif_tags <- function(file_path) {
   )
 
   # which is Exif in ASCII
-  res <- find_raw_marker("45786966", all_bytes, start_offset = APP1_offset + 2 + 2)
+  res <- .find_raw_marker("45786966", all_bytes, start_offset = APP1_offset + 2 + 2)
   Exif_offset <- res$offset
 
   # Read for little of big endian = THIS IS THE BEGINNING OF THE TIFF HEADER
-  res <- find_raw_marker(c("4D4D","4949"), all_bytes, start_offset = Exif_offset)
+  res <- .find_raw_marker(c("4D4D","4949"), all_bytes, start_offset = Exif_offset)
   TIFF_offset <- res$offset
   if ( res$marker == "4D4D") {
     endian <- "big"
@@ -241,6 +241,6 @@ read_exif_tags <- function(file_path) {
     endian = endian
   )
 
-  read_ifd_at(TIFF_offset + IFD_offset, all_bytes, endian, TIFF_offset)
+  .read_ifd_at(TIFF_offset + IFD_offset, all_bytes, endian, TIFF_offset)
 
 }
