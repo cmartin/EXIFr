@@ -11,6 +11,10 @@ expect_that(
   equals("Wingscapes")
 )
 
+expect_that(
+  read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["DateTime"]],
+  equals("2013:07:09 10:23:47")
+)
 
 context("tags from the sub-IFD section")
 
@@ -28,7 +32,6 @@ expect_that(
   read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["FocalLength"]],
   equals("18/1")
 )
-
 
 expect_that(
   read_exif_tags(system.file("extdata", "WSCT0151.JPG", package = "EXIFr"))[["ApertureValue"]],

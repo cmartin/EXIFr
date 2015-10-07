@@ -167,6 +167,7 @@ tag_number_to_tag_name <- function(tag_number){
   pairs[[ "37377" ]] <- "ShutterSpeedValue"
   pairs[[ "37386" ]] <- "FocalLength"
 
+  pairs[[ "306" ]] <- "DateTime"
   pairs[[ "271" ]] <- "Make"
   pairs[[ "272" ]] <- "Model"
 
