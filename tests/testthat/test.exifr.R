@@ -12,6 +12,11 @@ expect_that(
 )
 
 expect_that(
+  read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ShutterSpeedValue"]],
+  equals("1/3158")
+)
+
+expect_that(
   read_exif_tags(system.file("extdata", "WSCT0151.JPG", package = "EXIFr"))[["Make"]],
   equals("Wingscapes")
 )
