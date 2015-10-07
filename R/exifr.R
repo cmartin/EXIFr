@@ -153,6 +153,10 @@ find_raw_marker <- function(marker, all_bytes, start_offset=0) {
     } else {
       reading_head <- reading_head + 1
     }
+
+    if (reading_head > length(all_bytes)) {
+      break;
+    }
   }
 }
 
@@ -196,10 +200,13 @@ read_exif_tags <- function(file_path) {
   )
   close(con);rm(con)
 
-
   # Find the APP1 marker
   res <- find_raw_marker("FFE1", all_bytes)
   APP1_offset <- res$offset
+
+  if (is.null(res)) {
+    stop("APP1 marker not found, this image type is probably not supported (e.g. PNG)")
+  }
 
   # Read the length of the APP1 marker (APP1_offset + 1 + length of FFE1 marker)
   readBin(
