@@ -112,7 +112,9 @@
         .read_ifd_at(tag_value + TIFF_offset, all_bytes, endian, TIFF_offset)
       )
     } else {
-      tag_list[[tag_name]] <- tag_value
+      if (tag_name %in% supported_tag_list()) {
+        tag_list[[tag_name]] <- tag_value
+      }
     }
 
   }
@@ -146,15 +148,14 @@
   }
 }
 
-.tag_number_to_tag_name <- function(tag_number){
-  pairs = list()
+supported_tag_list <- function() {
+  unname(unlist(.get_supported_tags()))
+}
 
-#   pairs[[ "41990" ]] <- "SceneCaptureType"
-#   pairs[[ "41986" ]] <- "ExposureMode"
-#   pairs[[ "41987" ]] <- "WhiteBalance"
+.get_supported_tags <- function() {
+  pairs = list()
   pairs[[ "33434" ]] <- "ExposureTime"
   pairs[[ "37378" ]] <- "ApertureValue"
-  # pairs[[ "37377" ]] <- "ShutterSpeedValue"
   pairs[[ "37386" ]] <- "FocalLength"
   pairs[[ "34855" ]] <- "ISOSpeedRatings"
 
@@ -165,9 +166,15 @@
   pairs[[ "271" ]] <- "Make"
   pairs[[ "272" ]] <- "Model"
 
+  pairs
+
+}
+
+.tag_number_to_tag_name <- function(tag_number){
+
   t = as.character(tag_number)
-  if (t %in% names(pairs)) {
-    pairs[[t]]
+  if (t %in% names(.get_supported_tags())) {
+    .get_supported_tags()[[t]]
   } else {
     #warning(paste(tag_number, " tag number is not defined"))
     tag_number

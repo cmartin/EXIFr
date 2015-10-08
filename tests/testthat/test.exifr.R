@@ -1,4 +1,9 @@
 library(LAI)
+
+context("Supported tags listing")
+expect_true("ApertureValue" %in% supported_tag_list())
+expect_false("ShutterSpeedValue" %in% supported_tag_list())
+
 context("Basic EXIF extraction")
 
 expect_that(
