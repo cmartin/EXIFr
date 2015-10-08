@@ -4,7 +4,7 @@
 
 .read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
 
-  tag_list = list()
+  tag_list <- list()
   nb_dir_entries <- readBin(
     all_bytes[(IFD_start + 1):(IFD_start + 2)],
     "integer",
@@ -12,7 +12,7 @@
     endian = endian
   )
 
-  IFD_start = IFD_start + 3
+  IFD_start <- IFD_start + 3
 
   for (i in 1:nb_dir_entries) {
 
@@ -24,7 +24,7 @@
       signed = FALSE
     ) # tag number
 
-    tag_type = readBin(
+    tag_type <- readBin(
       all_bytes[(IFD_start + 2):(IFD_start + 3 )],
       "integer",
       size = 2,
@@ -49,60 +49,54 @@
 
     tag_name <- .tag_number_to_tag_name(tag_number)
     tag_value <- switch(tag_type,
-                        {"Byte not implemented"},
-
-                        {# 2 = ASCII
-                          readBin(
-                            all_bytes[(TIFF_offset + data_position + 1):
-                                        (TIFF_offset + data_position + data_length)],
-                            "char",
-                            size = data_length
-                          )
-
-                        },
-                        {# 3 = Int 16 bit
-                          readBin(
-                            all_bytes[(IFD_start + 8): # For entries less than 4 bytes, read data directly
-                                        (IFD_start + 11)],
-                            "integer",
-                            endian = endian,
-                            size = 2
-                          )
-                        },
-                        {# 4 = Int 32 bit
-                          readBin(
-                            all_bytes[(IFD_start + 8): # For entries less than 4 bytes, read data directly
-                                        (IFD_start + 11)],
-                            "integer",
-                            endian = endian,
-                            size = 4
-                          )
-                        },
-                        {# 5 = Rational
-
-                          paste(
-                            readBin(
-                              all_bytes[(TIFF_offset + data_position + 1):
-                                          (TIFF_offset + data_position + 4)],
-                              "integer",
-                              endian = endian,
-                              size = 4
-                            ),
-                            readBin(
-                              all_bytes[(TIFF_offset + data_position + 5):
-                                          (TIFF_offset + data_position + 8)],
-                              "integer",
-                              endian = endian,
-                              size = 4
-                            ),
-                            sep = "/"
-                          )
-                        }
+      # 1 Byte
+      "Byte not implemented"
+    , # 2 ASCII
+      readBin(
+        all_bytes[(TIFF_offset + data_position + 1):
+              (TIFF_offset + data_position + data_length)],
+        "char",
+        size = data_length
+      )
+    , # 3 Int 16 bit
+    # For entries less than 4 bytes, read data directly
+      readBin(
+        all_bytes[(IFD_start + 8):
+                    (IFD_start + 11)],
+        "integer",
+        endian = endian,
+        size = 2
+      )
+    , # 4 Int 32 bit
+      # For entries less than 4 bytes, read data directly
+      readBin(
+        all_bytes[(IFD_start + 8):
+                    (IFD_start + 11)],
+        "integer",
+        endian = endian,
+        size = 4
+      )
+    , # 5 Rational
+      paste(
+        readBin(
+          all_bytes[(TIFF_offset + data_position + 1):
+                      (TIFF_offset + data_position + 4)],
+          "integer",
+          endian = endian,
+          size = 4
+        ),
+        readBin(
+          all_bytes[(TIFF_offset + data_position + 5):
+                      (TIFF_offset + data_position + 8)],
+          "integer",
+          endian = endian,
+          size = 4
+        ),
+        sep = "/"
+      )
     )
 
     IFD_start <- IFD_start + 12
-
-    #print(paste(tag_type, tag_number,tag_value))
 
     if (tag_number == 34665) {
       #http://www.awaresystems.be/imaging/tiff/tifftags/subifds.html
@@ -160,7 +154,7 @@ supported_tags <- function() {
 }
 
 .supported_tags <- function() {
-  pairs = list()
+  pairs <- list()
   pairs[[ "33434" ]] <- "ExposureTime"
   pairs[[ "37378" ]] <- "ApertureValue"
   pairs[[ "37386" ]] <- "FocalLength"
@@ -179,11 +173,10 @@ supported_tags <- function() {
 
 .tag_number_to_tag_name <- function(tag_number){
 
-  t = as.character(tag_number)
+  t <- as.character(tag_number)
   if (t %in% names(.supported_tags())) {
     .supported_tags()[[t]]
   } else {
-    #warning(paste(tag_number, " tag number is not defined"))
     tag_number
   }
 
@@ -214,7 +207,7 @@ read_exif_tags <- function(file_path) {
   APP1_offset <- res$offset
 
   if (is.null(res)) {
-    stop("APP1 marker not found, this image type is probably not supported (e.g. PNG)")
+    stop("APP1 marker not found, this image type is probably not supported.")
   }
 
   # Read the length of the APP1 marker (APP1_offset + 1 + length of FFE1 marker)
@@ -227,11 +220,19 @@ read_exif_tags <- function(file_path) {
   )
 
   # which is Exif in ASCII
-  res <- .find_raw_marker("45786966", all_bytes, start_offset = APP1_offset + 2 + 2)
+  res <- .find_raw_marker(
+    "45786966",
+    all_bytes,
+    start_offset = APP1_offset + 2 + 2
+  )
   Exif_offset <- res$offset
 
   # Read for little of big endian = THIS IS THE BEGINNING OF THE TIFF HEADER
-  res <- .find_raw_marker(c("4D4D","4949"), all_bytes, start_offset = Exif_offset)
+  res <- .find_raw_marker(
+    c("4D4D","4949"),
+    all_bytes,
+    start_offset = Exif_offset
+  )
   TIFF_offset <- res$offset
   if ( res$marker == "4D4D") {
     endian <- "big"
