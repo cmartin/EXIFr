@@ -1,8 +1,8 @@
 Package: EXIFr
 Type: Package
 Title: Natively read EXIF tags from R
-Version: 0.0.0.9000
-Date: 2015-10-07
+Version: 0.0.0.9001
+Date: 2015-10-08
 Authors@R: person("Charles", "Martin", middle="A.", email = "charles.martin1@uqtr.ca",
                   role = c("aut", "cre"))
 Maintainer: Who to complain to <yourfault@somewhere.net>

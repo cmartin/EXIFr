@@ -46,4 +46,4 @@ The following resources were particularly useful :
 Please report any bugs to the [GitHub issue tracker](https://github.com/cmartin/EXIFr/issues) and write any questions to <charles.martin1@uqtr.ca>
 
 ## If this code is useful to you, please cite as : 
-Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9000.
+Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9001.
