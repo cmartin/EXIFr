@@ -112,7 +112,7 @@
         .read_ifd_at(tag_value + TIFF_offset, all_bytes, endian, TIFF_offset)
       )
     } else {
-      if (tag_name %in% supported_tag_list()) {
+      if (tag_name %in% supported_tags()) {
         tag_list[[tag_name]] <- tag_value
       }
     }
@@ -148,11 +148,18 @@
   }
 }
 
-supported_tag_list <- function() {
-  unname(unlist(.get_supported_tags()))
+#' List EXIF tags currently supported by this package.
+#'
+#' @return A vector of EXIF tag names.
+#' @examples
+#' "ExposureTime" %in% supported_tags()
+#' "AnInventedTag" %in% supported_tags()
+#' @export
+supported_tags <- function() {
+  unname(unlist(.supported_tags()))
 }
 
-.get_supported_tags <- function() {
+.supported_tags <- function() {
   pairs = list()
   pairs[[ "33434" ]] <- "ExposureTime"
   pairs[[ "37378" ]] <- "ApertureValue"
@@ -173,8 +180,8 @@ supported_tag_list <- function() {
 .tag_number_to_tag_name <- function(tag_number){
 
   t = as.character(tag_number)
-  if (t %in% names(.get_supported_tags())) {
-    .get_supported_tags()[[t]]
+  if (t %in% names(.supported_tags())) {
+    .supported_tags()[[t]]
   } else {
     #warning(paste(tag_number, " tag number is not defined"))
     tag_number
@@ -182,7 +189,16 @@ supported_tag_list <- function() {
 
 }
 
-
+#' Extract EXIF tags from an image file.
+#'
+#' Values are returned directly from the file, without any formatting.
+#' For example, the exposure time (ExposureTime), will be "1/3200".
+#'
+#' @param file_path The path to the image.
+#' @return A list of EXIF tags and their values.
+#' @examples
+#' read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ExposureTime"]]
+#' @export
 read_exif_tags <- function(file_path) {
   con <- file(file_path, "rb")
   rm(file_path)
