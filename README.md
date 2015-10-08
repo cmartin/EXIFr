@@ -1,4 +1,4 @@
-# EXIFr, a minimalist EXIF reader for R
+# EXIFr : Natively read EXIF tags from R
 
 This package natively reads EXIF tags from digital images. It does not rely on any external libraries or binary executables.
 
@@ -14,7 +14,7 @@ To keep things as simple as possible for the beginning, only the following tags 
 * Make
 * Model
 
-All values are returned as provided in the image file, so for example ExposureTime is "1/3200" and not 0.0003125
+All values are returned as provided in the image file, so for example ExposureTime is **"1/3200"** and not **0.0003125**
 
 
 ## To install : 
