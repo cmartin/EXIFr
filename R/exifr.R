@@ -1,7 +1,3 @@
-# http://code.flickr.net/2012/06/01/parsing-exif-client-side-using-javascript-2/
-# http://www.media.mit.edu/pia/Research/deepview/exif.html
-# http://www.exiv2.org/Exif2-2.PDF p. 14
-
 .read_ifd_at <- function(IFD_start, all_bytes, endian, TIFF_offset) {
 
   tag_list <- list()
