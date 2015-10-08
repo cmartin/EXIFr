@@ -221,6 +221,10 @@ read_exif_tags <- function(file_path) {
     all_bytes,
     start_offset = APP1_offset + 2 + 2
   )
+  if (is.null(res)) {
+    stop("EXIF marker not found.")
+  }
+
   Exif_offset <- res$offset
 
   # Read for little of big endian = THIS IS THE BEGINNING OF THE TIFF HEADER
