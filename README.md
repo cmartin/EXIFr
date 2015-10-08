@@ -16,6 +16,7 @@ To keep things as simple as possible for the beginning, only the following tags 
 
 All values are returned as provided in the image file, so for example ExposureTime is **"1/3200"** and not **0.0003125**
 
+N.B. A utility function is provided to convert from the rational format `rational_to_numeric("1/3200")`
 
 ## To install : 
 ```{r}
@@ -28,10 +29,13 @@ devtools::install_github("cmartin/EXIFr")
 library(EXIFr)
 
 # To list all tags : 
-read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))
+image_path = system.file("extdata", "preview.jpg", package = "EXIFr")
+read_exif_tags(image_path)
 
 # To view the value of a specific tag
-read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ApertureValue"]]
+read_exif_tags(image_path)[["ApertureValue"]]
+# or
+rational_to_numeric(read_exif_tags(image_path)[["ApertureValue"]])
 
 ```
 
@@ -46,4 +50,4 @@ The following resources were particularly useful :
 Please report any bugs to the [GitHub issue tracker](https://github.com/cmartin/EXIFr/issues) and write any questions to <charles.martin1@uqtr.ca>
 
 ## If this code is useful to you, please cite as : 
-Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9001.
+Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9002.

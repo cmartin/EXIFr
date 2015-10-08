@@ -1,6 +1,7 @@
 library(LAI)
 
 context("Supported tags listing")
+
 expect_true("ApertureValue" %in% supported_tags())
 expect_false("ShutterSpeedValue" %in% supported_tags())
 
@@ -56,4 +57,15 @@ expect_that(
 expect_that(
   read_exif_tags(system.file("extdata", "WSCT0151.JPG", package = "EXIFr"))[["ApertureValue"]],
   equals("3/1")
+)
+
+context("Utility functions")
+
+expect_that(
+  rational_to_numeric("3/1"),
+  equals(3)
+)
+expect_that(
+  rational_to_numeric("252606/100000"),
+  equals(2.52606)
 )
