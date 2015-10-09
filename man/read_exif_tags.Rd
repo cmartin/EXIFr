@@ -15,8 +15,12 @@ A list of EXIF tags and their values.
 \description{
 Values are returned directly from the file, without any formatting.
 For example, the exposure time (ExposureTime), will be "1/3200".
+This value can be converted afterwards with \code{\link{rational_to_numeric}}.
 }
 \examples{
 read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ExposureTime"]]
+}
+\seealso{
+\code{\link{rational_to_numeric}}
 }
 

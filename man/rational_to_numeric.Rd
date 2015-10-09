@@ -18,4 +18,7 @@ Converts a rational number from to string to its numeric representation
 \examples{
 rational_to_numeric("1/3200")
 }
+\seealso{
+\code{\link{read_exif_tags}}
+}
 
