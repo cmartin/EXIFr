@@ -97,9 +97,7 @@ Please report any bugs to the [GitHub issue tracker](https://github.com/cmartin/
 ## Citation
 If this code is useful to you, please cite as : 
 
-[![DOI](https://zenodo.org/badge/19481/cmartin/EXIFr.svg)](https://zenodo.org/badge/latestdoi/19481/cmartin/EXIFr)
-
 
 ```
-Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9003. https://github.com/cmartin/EXIFr
+Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9003. https://github.com/cmartin/EXIFr. DOI:10.5281/zenodo.34691
 ```
