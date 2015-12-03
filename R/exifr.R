@@ -141,9 +141,7 @@
 #' List EXIF tags currently supported by this package.
 #'
 #' @return A vector of EXIF tag names.
-#' @examples
-#' "ExposureTime" %in% supported_tags()
-#' "AnInventedTag" %in% supported_tags()
+#' @example /inst/examples/supported.Example.R
 #' @export
 supported_tags <- function() {
   unname(unlist(.supported_tags()))
@@ -186,8 +184,7 @@ supported_tags <- function() {
 #'
 #' @param file_path The path to the image.
 #' @return A list of EXIF tags and their values.
-#' @examples
-#' read_exif_tags(system.file("extdata", "preview.jpg", package = "EXIFr"))[["ExposureTime"]]
+#' @example /inst/examples/readexif.Example.R
 #' @export
 #' @seealso \code{\link{rational_to_numeric}}
 read_exif_tags <- function(file_path) {
