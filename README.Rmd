@@ -1,4 +1,11 @@
-# EXIFr : Natively read EXIF tags from R
+---
+title: "EXIFr : Natively read EXIF tags from R"
+output: 
+  html_document:
+    highlight: haddock
+    keep_md: yes
+    theme: readable
+---
 
 This package natively reads EXIF tags from digital images. It does not rely on any external libraries or binary executables.
 
@@ -19,67 +26,24 @@ All values are returned as provided in the image file, so for example ExposureTi
 N.B. A utility function is provided to convert from the rational format `rational_to_numeric("1/3200")`
 
 ## To install : 
-
-```r
+```{r eval=FALSE}
 library(devtools)
 devtools::install_github("cmartin/EXIFr")
 ```
 
 ## To try the code with one of the example images : 
-
-```r
+```{r comment = NA}
 library(EXIFr)
 
 # To list all tags : 
 image_path = system.file("extdata", "preview.jpg", package = "EXIFr")
 read_exif_tags(image_path)
-```
 
-```
-$Make
-[1] "Canon"
-
-$Model
-[1] "Canon EOS DIGITAL REBEL XS"
-
-$DateTime
-[1] "2013:07:09 10:23:47"
-
-$ExposureTime
-[1] "1/3200"
-
-$ISOSpeedRatings
-[1] 800
-
-$ApertureValue
-[1] "43/8"
-
-$FocalLength
-[1] "18/1"
-
-$PixelXDimension
-[1] 100
-
-$PixelYDimension
-[1] 67
-```
-
-```r
 # To view the value of a specific tag
 read_exif_tags(image_path)[["ApertureValue"]]
-```
-
-```
-[1] "43/8"
-```
-
-```r
 # or
 rational_to_numeric(read_exif_tags(image_path)[["ApertureValue"]])
-```
 
-```
-[1] 5.375
 ```
 
 ## If you need help with the EXIF format
@@ -94,7 +58,6 @@ Please report any bugs to the [GitHub issue tracker](https://github.com/cmartin/
 
 ## Citation
 If this code is useful to you, please cite as : 
-
-```
-Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9003. https://github.com/cmartin/EXIFr
+```{r echo=FALSE, comment=NA}
+cat(citation("EXIFr")$textVersion)
 ```
