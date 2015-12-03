@@ -1,5 +1,7 @@
 # EXIFr : Natively read EXIF tags from R
 
+[![DOI](https://zenodo.org/badge/19481/cmartin/EXIFr.svg)](https://zenodo.org/badge/latestdoi/19481/cmartin/EXIFr)
+
 This package natively reads EXIF tags from digital images. It does not rely on any external libraries or binary executables.
 
 To keep things as simple as possible for the beginning, only the following tags are currently available :
@@ -94,6 +96,9 @@ Please report any bugs to the [GitHub issue tracker](https://github.com/cmartin/
 
 ## Citation
 If this code is useful to you, please cite as : 
+
+[![DOI](https://zenodo.org/badge/19481/cmartin/EXIFr.svg)](https://zenodo.org/badge/latestdoi/19481/cmartin/EXIFr)
+
 
 ```
 Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9003. https://github.com/cmartin/EXIFr
