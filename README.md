@@ -38,32 +38,15 @@ read_exif_tags(image_path)
 ```
 
 ```
-$Make
-[1] "Canon"
-
-$Model
-[1] "Canon EOS DIGITAL REBEL XS"
-
-$DateTime
-[1] "2013:07:09 10:23:47"
-
-$ExposureTime
-[1] "1/3200"
-
-$ISOSpeedRatings
-[1] 800
-
-$ApertureValue
-[1] "43/8"
-
-$FocalLength
-[1] "18/1"
-
-$PixelXDimension
-[1] 100
-
-$PixelYDimension
-[1] 67
+Make            : Canon 
+Model           : Canon EOS DIGITAL REBEL XS 
+DateTime        : 2013:07:09 10:23:47 
+ExposureTime    : 1/3200 
+ISOSpeedRatings : 800 
+ApertureValue   : 43/8 
+FocalLength     : 18/1 
+PixelXDimension : 100 
+PixelYDimension : 67 
 ```
 
 ```r
@@ -99,5 +82,5 @@ If this code is useful to you, please cite as :
 
 
 ```
-Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9003. https://github.com/cmartin/EXIFr. DOI:10.5281/zenodo.34691
+Charles A. Martin (2015). EXIFr: Natively read EXIF tags from R. R package version 0.0.0.9004. https://github.com/cmartin/EXIFr. DOI:10.5281/zenodo.34691
 ```

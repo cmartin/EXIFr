@@ -10,7 +10,7 @@ read_exif_tags(file_path)
 \item{file_path}{The path to the image.}
 }
 \value{
-A list of EXIF tags and their values.
+A list-based S3 object of class exifData containing the tags and their values.
 }
 \description{
 Values are returned directly from the file, without any formatting.

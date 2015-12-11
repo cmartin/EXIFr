@@ -183,7 +183,7 @@ supported_tags <- function() {
 #' This value can be converted afterwards with \code{\link{rational_to_numeric}}.
 #'
 #' @param file_path The path to the image.
-#' @return A list of EXIF tags and their values.
+#' @return A list-based S3 object of class exifData containing the tags and their values.
 #' @example /inst/examples/readexif.Example.R
 #' @export
 #' @seealso \code{\link{rational_to_numeric}}
@@ -250,6 +250,20 @@ read_exif_tags <- function(file_path) {
     endian = endian
   )
 
-  .read_ifd_at(TIFF_offset + IFD_offset, all_bytes, endian, TIFF_offset)
+  structure(
+    .read_ifd_at(TIFF_offset + IFD_offset, all_bytes, endian, TIFF_offset),
+    class = "exifData"
+  )
 
+}
+
+#' @export
+print.exifData <- function(x,...) {
+  for (name in names(x)) {
+    cat(paste(
+      stringr::str_pad(name, max(stringr::str_length(names(x))), side = "right", pad = " "),
+      ":",
+      x[[name]],"\r\n"
+    ))
+  }
 }
