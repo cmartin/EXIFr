@@ -1,5 +1,3 @@
-library(LAI)
-
 context("Supported tags listing")
 
 expect_true("ApertureValue" %in% supported_tags())
