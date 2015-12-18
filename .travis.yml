@@ -4,6 +4,10 @@ sudo: required
 # Be strict when checking our package
 warnings_are_errors: true
 
+before_install:
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+
 install:
   - ./travis-tool.sh github_package jimhester/covr
 
