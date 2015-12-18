@@ -3,3 +3,9 @@ sudo: required
 
 # Be strict when checking our package
 warnings_are_errors: true
+
+install:
+  - ./travis-tool.sh github_package jimhester/covr
+
+after_success:
+  - Rscript -e 'covr::coveralls()'
